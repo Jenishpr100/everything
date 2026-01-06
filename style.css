@@ -64,3 +64,43 @@ h1 {
   box-shadow: 0 8px 20px rgba(102,126,234,0.5);
 }
 
+
+.tetos-btn {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  width: 100%;
+  max-width: 420px;
+  padding: 7px 21px;
+
+  background: #ff2b2b;
+  border-radius: 15px;
+  border: px solid #000;
+
+  text-decoration: none;
+  color: #2b0000;
+  font-weight: 700;
+  font-size: 1.2rem;
+
+  box-shadow: 0 8px 0 #000;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tetos-btn:hover {
+  transform: translateY(3px);
+  box-shadow: 0 4px 0 #000;
+}
+
+.tet-img {
+  width: 41.67px;
+  height: auto;
+  pointer-events: none;
+}
+
+.tet-text {
+  flex: 1;
+  text-align: center;
+}
