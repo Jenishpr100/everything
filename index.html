@@ -1,38 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Projects</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+  <title>My Websites</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="starfield"></canvas>
+  <main class="page-shell">
+    <header class="page-header">
+      <h1>My Websites<span aria-hidden="true">.</span></h1>
+      <p class="tagline">A home for my projects</p>
+      <label class="search-box">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>
+        <span class="sr-only">Search websites</span>
+        <input id="search" type="search" placeholder="Search websites" autocomplete="off">
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+    </header>
 
-  <div class="container">
-    <h1>My Projects</h1>
-    <div class="btn-group">
-      <a href="https://jenishpr100.github.io/GuessingNumber/" target="_blank" class="btn">🎲 Guessing Number</a>
-      <a href="https://jenishpr100.github.io/Timestamp-Calculator/" target="_blank" class="btn">⏳ Timestamp Calculator</a>
-      <a href="https://jenishpr100.github.io/JobApplication/" target="_blank" class="btn">🧾 Job Application</a>
-      <a href="https://jenishpr100.github.io/StopWatch/" target="_blank" class="btn">🕐 Stop Watch</a>
-      <a href="https://jenishpr100.github.io/Africa/" target="_blank" class="btn">🌍 Africa Map</a>
-      <a href="https://jenishpr100.github.io/gambling/" target="_blank" class="btn">🎰 Gambling</a>
-      <a href="https://jenishpr100.github.io/SpamPractice/" target="_blank" class="btn">📢 Spam Practice</a>
-      <a href="https://jenishpr100.github.io/RussianRoulette/index.html" target="_blank" class="btn">🔫 Russian Roulette</a>
-      <a href="https://jenishpr100.github.io/GuessingWithAI/" target="_blank" class="btn">🤖 Guessing With AI</a>
-      <a href="https://jenishpr100.github.io/Translator//" target="_blank" class="btn">🗣️Translator </a>
-    
-    
-    <a href="https://jenishpr100.github.io/TetOS" class="tetos-btn">
-  <img src="tet0.png" alt="Tet Left" class="tet-img left">
-  <span class="tet-text"><h2>TetOS</h2></span>
-  <img src="tet1.png" alt="Tet Right" class="tet-img right">
-</a>
-  
-
-    </div>
-  </div>
+    <section aria-label="Websites">
+      <div id="website-grid" class="website-grid"></div>
+      <p id="no-results" class="no-results" hidden>No websites match that search.</p>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
