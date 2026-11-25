@@ -1,29 +1,38 @@
 "use strict";
 
 /*
-  ADD OR EDIT WEBSITES HERE.
-  Keep the entries in the order you want them to appear.
-  See README.md before adding a custom design.
+  The website cards are read from websites.list (same folder).
+  Each line looks like:   https://example.com : "🎲 My Site"
+  - A leading emoji in the name becomes the card icon.
+  - Blank lines and lines starting with # are ignored.
+  - TetOS is always shown last, whatever line it is on.
 */
-const websites = [
-  { name: "🎲 Guessing Number", url: "https://jenishpr100.github.io/GuessingNumber/", icon: "🎲" },
-  { name: "⏳ Timestamp Calculator", url: "https://jenishpr100.github.io/Timestamp-Calculator/", icon: "⏳" },
-  { name: "🧾 Job Application", url: "https://jenishpr100.github.io/JobApplication/", icon: "🧾" },
-  { name: "🕐 Stop Watch", url: "https://jenishpr100.github.io/StopWatch/", icon: "🕐" },
-  { name: "🌍 Africa Map", url: "https://jenishpr100.github.io/Africa/", icon: "🌍" },
-  { name: "🎰 Gambling", url: "https://jenishpr100.github.io/gambling/", icon: "🎰" },
-  { name: "📢 Spam Practice", url: "https://jenishpr100.github.io/SpamPractice/", icon: "📢" },
-  { name: "🔫 Russian Roulette", url: "https://jenishpr100.github.io/RussianRoulette/index.html", icon: "🔫" },
-  { name: "🤖 Guessing With AI", url: "https://jenishpr100.github.io/GuessingWithAI/", icon: "🤖" },
-  { name: "🗣️ Translator", url: "https://jenishpr100.github.io/Translator//", icon: "🗣️" },
-  { name: "TetOS", url: "https://jenishpr100.github.io/TetOS", style: "tetos" }
-];
+let websites = [];
 
 const grid = document.getElementById("website-grid");
 const search = document.getElementById("search");
 const noResults = document.getElementById("no-results");
 
-// Names in the list start with the same emoji as their icon, so show it only once.
+const LEADING_EMOJI = /^\p{Extended_Pictographic}[\uFE0F\u200D\p{Extended_Pictographic}]*/u;
+
+// Turn websites.list text into card objects.
+function parseWebsites(text) {
+  const sites = [];
+  for (const rawLine of text.split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith("#")) continue;
+    const match = line.match(/^(\S+)\s*:\s*"(.*)"$/);
+    if (!match) continue;
+    const [, url, name] = match;
+    const emoji = name.match(LEADING_EMOJI);
+    const site = { name, url, icon: emoji ? emoji[0] : "" };
+    if (/tetos/i.test(name)) site.style = "tetos";
+    sites.push(site);
+  }
+  // TetOS always goes last.
+  return [...sites.filter((s) => !s.style), ...sites.filter((s) => s.style)];
+}
+
 function displayName(site) {
   return site.icon && site.name.startsWith(site.icon) ? site.name.slice(site.icon.length).trim() : site.name;
 }
@@ -91,4 +100,16 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-renderWebsites();
+fetch("websites.list", { cache: "no-store" })
+  .then((response) => {
+    if (!response.ok) throw new Error(response.status);
+    return response.text();
+  })
+  .then((text) => {
+    websites = parseWebsites(text);
+    renderWebsites();
+  })
+  .catch(() => {
+    noResults.textContent = "Could not load websites.list. Open this page from a web server (or GitHub Pages), not by double-clicking the file.";
+    noResults.hidden = false;
+  });
