@@ -177,7 +177,7 @@ kbd {
   color: #fff;
   transition: background-color .2s ease;
 }
-.website-card--tetos:not(:first-child) { margin-top: 28px; }
+.website-card--tetos:not(:first-child) { margin-top: 56px; }
 .website-card--tetos .website-icon { display: flex; height: 144px; flex: 0 0 auto; align-items: flex-end; align-self: flex-end; }
 .website-card--tetos .website-icon img { display: block; width: 124px; height: 124px; margin-bottom: -17px; object-fit: contain; transition: transform .25s ease; }
 .website-card--tetos .website-icon img + img { margin-left: -28px; }
